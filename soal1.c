@@ -21,10 +21,10 @@ void hapus(char *string, int index, int limit){
 
 int main(){
     int open, close;
-    int markfordeath = -1;
+    int markfordeath = 99; //Revisi: Autograder meminta '(' paling awal dihapus saat berlebih
     char in[99];
 
-    scanf("%s", in);
+    scanf("%[^\n]%*c", in); //Revisi: Input bisa spasi
     int lim = strlen(in);
     do{
         open = 0;
@@ -34,7 +34,9 @@ int main(){
                 if (in[i] == '(' || in[i] == ')'){
                     if(in[i] == '('){
                         open +=1;
-                        markfordeath = i;
+                        if(i < markfordeath){
+                            markfordeath = i; //Revisi: Autograder meminta '(' paling awal dihapus saat berlebih
+                        }
                     }else if(in[i] == ')'){
                         close += 1;
                         if (open < close){
@@ -61,4 +63,5 @@ int main(){
  * https://stackoverflow.com/questions/22736348/char-comparison-in-c
  * https://stackoverflow.com/questions/5457608/how-to-remove-the-character-at-a-given-index-from-a-string-in-c
  * https://stackoverflow.com/questions/18949552/removing-last-character-in-c\
+ * https://www.geeksforgeeks.org/c/taking-string-input-space-c-3-different-methods/
 **/
